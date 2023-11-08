@@ -36,8 +36,8 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ background: '#003', boxShadow: 'none' }}>
-      <Container maxWidth="xl">
+    <AppBar position="static" sx={{ background: '#003', boxShadow: 'none',padding: '20px' }}>
+      <Container  maxWidth="xl" >
         <Toolbar disableGutters>
           
           <Typography
@@ -53,6 +53,10 @@ function Header() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              fontSize: '70px',
+              marginLeft: '-10px',
+              paddingRight: '900px',
+
             }}
           >
             Super MArket
@@ -67,7 +71,9 @@ function Header() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{ color: 'white' , fontSize: '40px' }} />
+
+
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -118,9 +124,13 @@ function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', size: 'large' }}
+
+                size="large"
               >
                 {page}
+
+                
               </Button>
             ))}
           </Box>

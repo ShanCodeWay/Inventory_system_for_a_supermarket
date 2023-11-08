@@ -11,6 +11,7 @@ import {
   Paper,
   TextField,
   Typography,
+  Container,
   
 } from '@mui/material';
 import './path-to-bootstrap.css';
@@ -105,8 +106,10 @@ function Inventory() {
 
   return (
     <div className="container my-4">
-      <Typography variant="h4">Inventory Management</Typography>
+      <Container style={{ position: 'relative', top: '20%', left: '50%', transform: 'translate(-50%, -20%)', padding: '20px', background: 'rgba(255, 255, 255, 0.6)', borderRadius: '40px' }}>
 
+      <Typography variant="h3" style={{ textAlign: 'center' , color: '#120079', fontWeight: 'bold' }} >Inventory Management</Typography>
+      </Container>
       <SearchBar
         value={itemId}
         onChange={(newValue) => setItemId(newValue)}
