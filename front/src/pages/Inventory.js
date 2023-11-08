@@ -1,15 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  TextField,
+  Typography,
+  
+} from '@mui/material';
+import './path-to-bootstrap.css';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
+import SearchBar from 'material-ui-search-bar';
+import Modal from '@mui/material/Modal';
 
-function App() {
+function Inventory() {
   const [items, setItems] = useState([]);
-  const [item, setItem] = useState({}); // State to track the item being edited
+  const [item, setItem] = useState({});
   const [itemId, setItemId] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
+  const [value, setValue] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -39,6 +60,7 @@ function App() {
       await axios.put(`http://localhost:3000/api/items/${itemId}`, item);
       fetchData();
       setItem({}); // Clear the item state after updating
+      closeModal(); // Close the modal after updating
     } catch (error) {
       console.error('Error updating item:', error);
     }
@@ -47,9 +69,10 @@ function App() {
   const handleDeleteItem = async () => {
     try {
       // Use the provided itemId to delete the item
-      await axios.delete(`http://localhost:3000/api/items/${itemId}`,item);
+      await axios.delete(`http://localhost:3000/api/items/${itemId}`);
       fetchData();
       setItem({});
+      closeModal(); // Close the modal after deleting
     } catch (error) {
       console.error('Error deleting item:', error);
     }
@@ -59,27 +82,90 @@ function App() {
     try {
       const response = await axios.get(`http://localhost:3000/api/items/${itemId}`);
       setItem(response.data);
+      if (response.data) {
+        openModal(); // Open the modal when a matching item is found
+      }
     } catch (error) {
       console.error('Error searching for item:', error);
     }
   };
 
+  const doSomethingWith = (value) => {
+    // Call the handleSearchItem function with the search value
+    handleSearchItem(value);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <div>
+    <div className="container my-4">
       <Typography variant="h4">Inventory Management</Typography>
-      <TextField label="Item ID" value={itemId} onChange={(e) => setItemId(e.target.value)} />
-        <Button variant="contained" color="primary" onClick={handleSearchItem}>Search Item</Button>
-      <div>
-        <TextField label="Item ID" value={itemId} onChange={(e) => setItemId(e.target.value)} />
-        <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} />
-        <TextField label="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
-        <TextField label="Quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} type="number" />
-        <TextField label="Price" value={price} onChange={(e) => setPrice(e.target.value)} type="number" />
-        <Button variant="contained" color="primary" onClick={handleAddItem}>Add Item</Button>
+
+      <SearchBar
+        value={itemId}
+        onChange={(newValue) => setItemId(newValue)}
+        onRequestSearch={handleSearchItem}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            handleSearchItem();
+          }
+        }}
+        style={{
+          marginLeft: '80%',
+          backgroundColor: '#f0f0f0',
+          borderRadius: '10px',
+          border: '1px solid #ccc',
+          padding: '5px 10px',
+          width: '300px', // Set the width as per your preference
+        }}
+        placeholder="Search by ID" // Change the label to "Search by ID"
+      />
+
+      <div className="form-group mt-3">
+        <TextField
+          className="form-control"
+          label="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <TextField
+          className="form-control"
+          label="Category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
+        <TextField
+          className="form-control"
+          label="Quantity"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+          type="number"
+        />
+        <TextField
+          className="form-control"
+          label="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          type="number"
+        />
+        <Button
+          variant="contained"
+          style={{ marginLeft: '10px', color: 'white', backgroundColor: '#3069e4' }}
+          onClick={handleAddItem}
+          startIcon={<AddIcon />}
+        >
+          Add Item
+        </Button>
       </div>
+
       <TableContainer component={Paper}>
-        <Table>
+        <Table className="table table-bordered table-striped table-hover mt-4">
           <TableHead>
             <TableRow>
               <TableCell>Item ID</TableCell>
@@ -99,42 +185,33 @@ function App() {
                 <TableCell>{item.quantity}</TableCell>
                 <TableCell>{item.price}</TableCell>
                 <TableCell>
-               
-                <Button
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  console.log("Editing item with itemID:", item.itemID);
-                  setItem(item);
-                  setItemId(item.itemID);
-                }}
-              >
-                Edit
-              </Button>
+                  <Button
+                    variant="contained"
+                    style={{ backgroundColor: 'green', color: 'white', marginLeft: '10px' }}
+                    startIcon={<EditIcon />}
+                    onClick={() => {
+                      console.log("Editing item with itemID:", item.itemID);
+                      setItem(item);
+                      setItemId(item.itemID);
+                      openModal(); // Open the modal when the edit button is clicked
+                    }}
+                  >
+                    Edit
+                  </Button>
 
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  console.log("Editing item with itemID:", item.itemID);
-                  setItem(item);
-                  setItemId(item.itemID)
-                  
-                  ;
-                }}
-              >
-                Delete
-              </Button>
-
-
-
-             
-
-
-
-
-
-
+                  <Button
+                    variant="contained"
+                    style={{ backgroundColor: 'red', color: 'white', marginLeft: '10px' }}
+                    startIcon={<DeleteIcon />}
+                    onClick={() => {
+                      console.log("Editing item with itemID:", item.itemID);
+                      setItem(item);
+                      setItemId(item.itemID);
+                      openModal(); // Open the modal when the delete button is clicked
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -143,23 +220,82 @@ function App() {
       </TableContainer>
 
 
-      {item._id && (
-  <div>
+
+      <Modal
+  open={isModalOpen}
+  onClose={closeModal}
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+>
+  <div style={modalStyle} className="modal-content">
     <Typography variant="h6">Edit Item</Typography>
-    <TextField label="Item ID" value={item.itemID} onChange={(e) => setItem({ ...item, itemID: e.target.value })} />
-    <TextField label="Name" value={item.name} onChange={(e) => setItem({ ...item, name: e.target.value })} />
-    <TextField label="Category" value={item.category} onChange={(e) => setItem({ ...item, category: e.target.value })} />
-    <TextField label="Quantity" value={item.quantity} onChange={(e) => setItem({ ...item, quantity: e.target.value })} type="number" />
-    <TextField label="Price" value={item.price} onChange={(e) => setItem({ ...item, price: e.target.value })} type="number" />
-
-
-    <Button variant="contained" color="primary" onClick={handleUpdateItem}>Update Item</Button>
-    <Button variant="contained" color="primary" onClick={handleDeleteItem}>Delete Item</Button>
+    <TextField
+      className="form-control"
+      label="Item ID"
+      value={item.itemID}
+      onChange={(e) => setItem({ ...item, itemID: e.target.value })}
+    />
+    <TextField
+      className="form-control"
+      label="Name"
+      value={item.name}
+      onChange={(e) => setItem({ ...item, name: e.target.value })}
+    />
+    <TextField
+      className="form-control"
+      label="Category"
+      value={item.category}
+      onChange={(e) => setItem({ ...item, category: e.target.value })}
+    />
+    <TextField
+      className="form-control"
+      label="Quantity"
+      value={item.quantity}
+      onChange={(e) => setItem({ ...item, quantity: e.target.value })}
+      type="number"
+    />
+    <TextField
+      className="form-control"
+      label="Price"
+      value={item.price}
+      onChange={(e) => setItem({ ...item, price: e.target.value })}
+      type="number"
+    />
+    <div className="button-container">
+      <Button variant="contained" onClick={handleUpdateItem}>
+        Update Item
+      </Button>
+      <Button
+        variant="contained"
+        style={{ backgroundColor: 'red', color: 'white', marginLeft: '10px' }}
+        startIcon={<DeleteIcon />}
+        onClick={handleDeleteItem}
+      >
+        Delete Item
+      </Button>
+    </div>
   </div>
-)}
+</Modal>
+
+
+
+
 
     </div>
   );
 }
 
-export default App;
+export default Inventory;
+
+
+const modalStyle = {
+  position: 'fixed',
+  top: '50%', // Center the modal vertically
+  left: '50%', // Center the modal horizontally
+  transform: 'translate(-50%, -50%)', // Center the modal both vertically and horizontally
+  backgroundColor: 'white',
+  padding: '20px',
+  borderRadius: '10px',
+  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+  maxWidth: '80%', // Set the maximum width as per your preference
+};
