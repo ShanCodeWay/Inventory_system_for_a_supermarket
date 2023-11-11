@@ -13,6 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import darshanaAvatar from './frr.jpg';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+
+
+
+
+
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -55,10 +62,12 @@ function Header() {
               textDecoration: 'none',
               fontSize: '70px',
               marginLeft: '-10px',
-              paddingRight: '900px',
+              paddingRight: '1300px' ,
 
             }}
           >
+            <ShoppingCartIcon 
+           sx={{ fontSize: 90 }} />
             Super MArket
           </Typography>
 
@@ -137,9 +146,9 @@ function Header() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Darshana" src={darshanaAvatar} />
-              </IconButton>
+            <IconButton sx={{ fontSize: '40px' }} onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+  <Avatar alt="Darshana" src={darshanaAvatar} sx={{ marginLeft: '20px', width: 60, height: 60 }} />
+</IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
