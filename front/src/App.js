@@ -4,7 +4,7 @@ import Footer from './components/footer';
 import Header from './components/Header';
 import './components/bootstrap.min.css';
 import black from './ecommerce-website.webp';
-import StaticDateTimePickerWithRealTime from './components/StaticDateTimePickerWithRealTime';
+
 
 function App() {
   const appStyle = {

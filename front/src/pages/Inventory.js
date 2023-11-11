@@ -159,7 +159,7 @@ const [alert, setAlert] = useState({
         setItem({ quantity: '', price: '' });
         setSubmitButtonClicked(false);
   
-        // Optionally, you can fetch updated data after adding the item
+        
         fetchData();
       } catch (error) {
         console.error('Error adding item:', error);
@@ -170,7 +170,7 @@ const [alert, setAlert] = useState({
 
   const handleUpdateItem = async () => {
     try {
-      // Use the actual item._id from the state to update the item
+      
       await axios.put(`http://localhost:3000/api/items/${itemId}`, item);
       fetchData();
       setItem({}); // Clear the item state after updating
@@ -502,8 +502,8 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
     readOnly: true,
     style: {
       paddingLeft: '10px',
-      color: 'red', // Change the font color to red
-      fontWeight: 'bold', // Change the font weight to bold
+      color: 'red',
+      fontWeight: 'bold', 
       fontSize: '25px',
       fontFamily: 'poppins',
     },
@@ -512,8 +512,8 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
     readOnly: true,
     style: {
       paddingLeft: '10px',
-      color: 'red', // Change the font color to red
-      fontWeight: 'bold', // Change the font weight to bold
+      color: 'red', 
+      fontWeight: 'bold', 
       fontSize: '25px',
       fontFamily: 'poppins',
     },
@@ -535,17 +535,17 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
   helperText={!item.name ? 'Name is required' : ''}
   InputProps={{
     style: {
-      color: 'blue', // Change the font color to blue
+      color: 'blue', 
       fontWeight: 'normal',
       fontSize: '25px',
-      fontFamily: 'poppins', // Change the font weight to normal
+      fontFamily: 'poppins', 
     },
   }}
   InputLabelProps={{
     style: {
-      color: 'blue', // Change the font color to blue
+      color: 'blue', 
       fontWeight: 'bold',
-      fontSize: '25px', // Change the font weight to normal
+      fontSize: '25px', 
       fontFamily: 'montserrat',
       
     },
@@ -561,18 +561,18 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
   InputProps={{
     readOnly: true,
     style: {
-      color: 'green', // Change the font color to green
+      color: 'green', 
       fontWeight: '',
       fontSize: '25px',
-      fontFamily: 'poppins', // Change the font weight to bold
+      fontFamily: 'poppins', 
     },
   }}
   InputLabelProps={{
     style: {
-      color: 'green', // Change the font color to green
+      color: 'green', 
       fontWeight: 'bold',
       fontSize: '25px',
-      fontFamily: 'poppins', // Change the font weight to bold
+      fontFamily: 'poppins', 
     },
   }}
 />
@@ -594,17 +594,17 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
           onChange={(e) => setItem({ ...item, category: e.target.value })}
           InputProps={{
             style: {
-              color: 'green', // Change the font color to orange
+              color: 'green', 
               fontWeight: '', 
               fontFamily: 'poppins', 
               fontSize: '25px',
-              paddingLeft:'10px', // Change the font weight to bold
+              paddingLeft:'10px', 
             },
           }}
           InputLabelProps={{
             style: {
-              color: 'green', // Change the font color to orange
-              fontWeight: 'bold', // Change the font weight to bold
+              color: 'green', 
+              fontWeight: 'bold', 
               fontFamily: 'poppins',
               fontSize: '25px',
               marginBottom: '10px',
@@ -629,19 +629,19 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
   variant='filled'
   InputProps={{
     style: {
-      color: 'purple', // Change the font color to purple
+      color: 'purple', 
       fontWeight: 'bold', 
       fontFamily: 'poppins', 
       fontSize: '25px', 
-      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',// Change the font weight to normal
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
     },
   }}
   InputLabelProps={{
     style: {
-      color: 'purple', // Change the font color to purple
+      color: 'purple', 
       fontWeight: 'bold',
       fontFamily: 'poppins',
-      fontSize: '25px', // Change the font weight to normal
+      fontSize: '25px', 
     },
   }}
 />
@@ -658,23 +658,23 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
     
     startAdornment: <InputAdornment position="start" 
     style={{fontSize: '25px',
-                color: 'orange', // Change the font color to orange
+                color: 'orange', 
               }} 
               >
                 <Typography style={{fontSize: '30px',}}>Rs:</Typography >
                 </InputAdornment>,
 
               style: {
-                color: 'brown', // Change the font color to orange
+                color: 'brown', 
                 fontWeight: '', 
                 fontFamily: 'poppins', 
-                fontSize: '25px', // Change the font weight to bold
+                fontSize: '25px', 
               },
             }}
   InputLabelProps={{
     style: {
-      color: 'brown', // Change the font color to orange
-      fontWeight: 'bold', // Change the font weight to bold
+      color: 'brown', 
+      fontWeight: 'bold', 
       fontFamily: 'poppins',
       fontSize: '25px',
       marginBottom: '10px',
@@ -773,16 +773,16 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
   onChange={(e) => setName(e.target.value)}
   InputProps={{
     style: {
-      color: 'blue', // Change the font color to orange
+      color: 'blue', 
       fontWeight: '', 
       fontFamily: 'poppins', 
-      fontSize: '25px', // Change the font weight to bold
+      fontSize: '25px', 
     },
   }}
   InputLabelProps={{
     style: {
-      color: 'blue', // Change the font color to orange
-      fontWeight: 'bold', // Change the font weight to bold
+      color: 'blue', 
+      fontWeight: 'bold', 
       fontFamily: 'poppins',
       fontSize: '25px',
       marginBottom: '10px',
@@ -811,17 +811,17 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
           onChange={(e) => setCategory(e.target.value)}
           InputProps={{
             style: {
-              color: 'green', // Change the font color to orange
+              color: 'green', 
               fontWeight: '', 
               fontFamily: 'poppins', 
               fontSize: '25px',
-              paddingLeft:'10px', // Change the font weight to bold
+              paddingLeft:'10px', 
             },
           }}
           InputLabelProps={{
             style: {
-              color: 'green', // Change the font color to orange
-              fontWeight: 'bold', // Change the font weight to bold
+              color: 'green', 
+              fontWeight: 'bold', 
               fontFamily: 'poppins',
               fontSize: '25px',
               marginBottom: '10px',
@@ -848,16 +848,16 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
 
   InputProps={{
     style: {
-      color: 'purple', // Change the font color to orange
+      color: 'purple', 
       fontWeight: '', 
       fontFamily: 'poppins', 
-      fontSize: '25px', // Change the font weight to bold
+      fontSize: '25px', 
     },
   }}
   InputLabelProps={{
     style: {
-      color: 'purple', // Change the font color to orange
-      fontWeight: 'bold', // Change the font weight to bold
+      color: 'purple', 
+      fontWeight: 'bold', 
       fontFamily: 'poppins',
       fontSize: '25px',
       marginBottom: '10px',
@@ -880,22 +880,22 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
   InputProps={{
     startAdornment: <InputAdornment position="start" 
     style={{fontSize: '25px',
-                color: 'orange', // Change the font color to orange
+                color: 'orange', 
               }} 
               >
                 <Typography style={{fontSize: '30px',}}>Rs:</Typography >
                 </InputAdornment>,
     style: {
-      color: 'orange', // Change the font color to orange
+      color: 'orange', 
       fontWeight: '', 
       fontFamily: 'poppins', 
-      fontSize: '25px', // Change the font weight to bold
+      fontSize: '25px', 
     },
   }}
   InputLabelProps={{
     style: {
-      color: 'orange', // Change the font color to orange
-      fontWeight: 'bold', // Change the font weight to bold
+      color: 'orange', 
+      fontWeight: 'bold', 
       fontFamily: 'poppins',
       fontSize: '25px',
       marginBottom: '10px',
@@ -946,7 +946,7 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
     <Typography variant="h6" md="2" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', color: '#120079', fontWeight: 'bold', textAlign: 'center', padding: '20px', fontSize: '40px', borderColor: '#120079', borderRadius: '40px', borderWidth: '5px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', marginBottom: '20px' }}>
       No Data Found
     </Typography>
-    {/* Add content for the "No Data" modal here */}
+   
   </div>
 </Modal>
 
@@ -963,9 +963,9 @@ export default Inventory;
 
 const modalStyle = {
   position: 'fixed',
-  top: '50%', // Center the modal vertically
-  left: '50%', // Center the modal horizontally
-  transform: 'translate(-50%, -50%)', // Center the modal both vertically and horizontally
+  top: '50%', 
+  left: '50%', 
+  transform: 'translate(-50%, -50%)', 
   
   padding: '60px',
   borderRadius: '80px',

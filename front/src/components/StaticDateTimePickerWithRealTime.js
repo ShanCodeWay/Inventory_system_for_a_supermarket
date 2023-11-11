@@ -1,32 +1,32 @@
-// StaticDateTimePickerWithRealTime.js
-/*
 
+/* 
 import React, { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
 import TextField from '@mui/material/TextField';
+import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
 
 const StaticDateTimePickerWithRealTime = () => {
-  const [currentDateTime, setCurrentDateTime] = useState(dayjs());
+  const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentDateTime(dayjs());
+      setCurrentDateTime(new Date());
     }, 1000); // Update every second
 
     return () => clearInterval(intervalId);
   }, []);
 
+  // Format date and time without milliseconds
+  const formattedDateTime = currentDateTime.toISOString().slice(0, 19).replace('T', ' ');
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StaticDateTimePicker
-        value={currentDateTime}
-        onChange={(newValue) => setCurrentDateTime(newValue)}
-        renderInput={(props) => <TextField {...props} variant="standard" />}
-      />
-    </LocalizationProvider>
+    <TextField
+      label="Date and Time"
+      value={formattedDateTime}
+      variant="standard"
+      InputProps={{
+        readOnly: true,
+      }}
+    />
   );
 };
 
