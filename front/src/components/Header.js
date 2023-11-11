@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import darshanaAvatar from './frr.jpg';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import MiniDrawer from './MiniDrawer';
 
 
 
@@ -46,7 +46,7 @@ function Header() {
     <AppBar position="static" sx={{ background: '#003', boxShadow: 'none',padding: '20px' }}>
       <Container  maxWidth="xl" >
         <Toolbar disableGutters>
-          
+         
           <Typography
             variant="h1"
             noWrap
@@ -175,7 +175,9 @@ function Header() {
           </Box>
         </Toolbar>
       </Container>
+      <MiniDrawer/>
     </AppBar>
+   
   );
 }
 export default Header;

@@ -18,16 +18,20 @@ import {
   fontFamily,
   boxShadow,
   Snackbar,
-  AlertTitle
-  
+  AlertTitle,
+  Grid,
+  FormControlLabel,
  
   
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import './path-to-bootstrap.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import AddIcon from '@mui/icons-material/Add';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SearchIcon from '@mui/icons-material/Search';
@@ -85,6 +89,9 @@ const [alert, setAlert] = useState({
   message: '',
   severity: 'success', // Default severity
 });
+
+
+
   const categorylist = [
     {
       value: '',
@@ -267,7 +274,7 @@ const [alert, setAlert] = useState({
 </Snackbar>
       <Container style={{ position: 'relative', top: '20%', padding: '20px', background: 'rgba(255, 255, 255, 0.6)', borderRadius: '40px' }}>
 
-      <Typography variant="h3" style={{ textAlign: 'center' , color: '#120079', fontWeight: 'bold' }} >Inventory Management</Typography>
+      <Typography variant="h3" style={{ textAlign: 'center' , color: '#120079', fontWeight: 'bold', }} >Inventory Management</Typography>
       </Container>
 
       <SearchBar
@@ -286,7 +293,8 @@ const [alert, setAlert] = useState({
           borderRadius: '10px',
           border: '1px solid #ccc',
           padding: '5px 10px',
-          width: '300px', // Set the width as per your preference
+          width: '300px', 
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8)'
         }}
         placeholder="Search by ID" // Change the label to "Search by ID"
       />
@@ -305,7 +313,7 @@ const [alert, setAlert] = useState({
     backgroundColor: '#3069e4',
     size: 'large',
     boxShadow:
-      '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
   }}
   onClick={() => {
     setItem({}); // Reset the item state to an empty object
@@ -331,24 +339,27 @@ const [alert, setAlert] = useState({
 
 
 
-      <TableContainer component={Paper} sx={{ maxHeight: 800, minHeight: 640, backgroundColor: 'rgba(199, 199, 255, 0.8)' }}>
+      <TableContainer component={Paper} sx={{ maxHeight: 800, minHeight: 640, backgroundColor: 'rgba(199, 199, 255, 0.8)',boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8)'}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell sx={{ backgroundColor: ' rgb(0, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
-              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> Item ID</TableCell>
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> Item ID</TableCell>
               <TableCell sx={{ backgroundColor: ' rgb(0, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
-              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> Name</TableCell>
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> Name</TableCell>
               <TableCell sx={{ backgroundColor: ' rgb(0, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
-              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> Category</TableCell>
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> Category</TableCell>
                <TableCell sx={{ backgroundColor: ' rgb(0, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
-              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">Quantity</TableCell>
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">Quantity</TableCell>
                <TableCell sx={{ backgroundColor: ' rgb(0, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
-              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"><TableRow>Unit Price</TableRow>(Rs.)</TableCell>
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">Status</TableCell>
+
+               <TableCell sx={{ backgroundColor: ' rgb(0, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"><TableRow>Unit Price</TableRow>(Rs.)</TableCell>
              <TableCell sx={{ backgroundColor: ' rgb(0, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
-              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> <TableRow>Total Value</TableRow>(Rs.)</TableCell>
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> <TableRow>Total Value</TableRow>(Rs.)</TableCell>
               <TableCell sx={{ backgroundColor: ' rgb(0, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
-              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> Actions</TableCell>
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center"> Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -358,7 +369,7 @@ const [alert, setAlert] = useState({
               <TableRow key={item._id}>
                 <TableCell
                 sx={{ backgroundColor: ' rgb(120, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
-                boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">
+                boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">
                   {item.itemID}</TableCell>
 
                 <TableCell sx={{ backgroundColor: ' rgb(8, 143, 247, 0.2)', color: 'black', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
@@ -369,9 +380,20 @@ const [alert, setAlert] = useState({
               boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">
                   {item.category}</TableCell>
 
-                <TableCell sx={{ backgroundColor: ' rgb(209, 0, 224, 0.2)', color: 'darkpurple', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
+                <TableCell sx={{ backgroundColor: ' rgb(107, 255, 245, 0.2)', color: 'darkpurple', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
               boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">
                   {item.quantity}</TableCell>
+
+                  <TableCell sx={{ backgroundColor: ' rgb(246, 250, 0, 0.2)', color: 'darkpurple', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">
+                {item.quantity > 0 ? (
+          <>
+            <CheckCircleIcon style={{ color: 'green', marginRight: '5px', }} />
+            <span>Available</span>
+          </>
+        ) : (
+          <span style={{ color: 'red' }}><ProductionQuantityLimitsIcon style={{ color: 'red', marginRight: '5px' }} /> Not Available</span>
+        )}</TableCell>
 
                 <TableCell sx={{ backgroundColor: ' rgb(214, 125, 0, 0.2)', color: 'darkred', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
               boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } >
@@ -386,7 +408,7 @@ const [alert, setAlert] = useState({
 
                   <Button
                     variant="contained"
-                    style={{ backgroundColor: 'green', color: 'white', marginLeft: '10px' }}
+                    style={{ backgroundColor: 'green', color: 'white', marginLeft: '10px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8)' }}
                     startIcon={<EditIcon />}
                     onClick={() => {
                       console.log("Editing item with itemID:", item.itemID);
@@ -405,6 +427,9 @@ const [alert, setAlert] = useState({
           </TableBody>
         </Table>
         <TablePagination
+      sx={{
+        backgroundColor: 'rgb(0, 75, 250, 0.2)',color: 'white', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.6)', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px',
+      }}
       rowsPerPageOptions={[10, 25, 100]}
       component="div"
       count={items.length} 
@@ -466,9 +491,8 @@ TransitionComponent={Transition}
     padding: '20px',fontSize: '40px',borderColor: '#120079',borderRadius: '40px',borderWidth: '5px' , boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', marginBottom: '20px'}} >
       Edit Item</Typography>
 
-
-      
-
+<Paper elevation={3} sx={{ backgroundColor: 'rgba(112, 112, 112, 0.6)',color: '#120079' , fontWeight: 'bold', textAlign: 'center',
+boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%', padding: '40px', height: 'auto', }} > 
       <TextField
   className="form-control"
   label="Item ID"
@@ -502,6 +526,8 @@ TransitionComponent={Transition}
 
 <TextField
   className="form-control"
+  id="filled-search"
+  variant='filled'
   label="please insert item name"
   value={item.name}
   onChange={(e) => setItem({ ...item, name: e.target.value })}
@@ -529,7 +555,7 @@ TransitionComponent={Transition}
 <TextField
   className="form-control"
   label="Category"
- 
+  variant='filled'
   value={item.category}
   onChange={(e) => setItem({ ...item, category: e.target.value })}
   InputProps={{
@@ -595,16 +621,19 @@ TransitionComponent={Transition}
 
 <TextField
   className="form-control"
+  
   label="Quantity"
   value={item.quantity}
   onChange={(e) => setItem({ ...item, quantity: e.target.value })}
   type="number"
+  variant='filled'
   InputProps={{
     style: {
       color: 'purple', // Change the font color to purple
       fontWeight: 'bold', 
       fontFamily: 'poppins', 
-      fontSize: '25px', // Change the font weight to normal
+      fontSize: '25px', 
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',// Change the font weight to normal
     },
   }}
   InputLabelProps={{
@@ -620,6 +649,7 @@ TransitionComponent={Transition}
 <TextField
   className="form-control"
   label="Unit Price"
+  variant='filled'
   value={item.price}
   onChange={(e) => setItem({ ...item, price: e.target.value })}
   type="number"
@@ -635,7 +665,7 @@ TransitionComponent={Transition}
                 </InputAdornment>,
 
               style: {
-                color: 'orange', // Change the font color to orange
+                color: 'brown', // Change the font color to orange
                 fontWeight: '', 
                 fontFamily: 'poppins', 
                 fontSize: '25px', // Change the font weight to bold
@@ -643,25 +673,29 @@ TransitionComponent={Transition}
             }}
   InputLabelProps={{
     style: {
-      color: 'orange', // Change the font color to orange
+      color: 'brown', // Change the font color to orange
       fontWeight: 'bold', // Change the font weight to bold
       fontFamily: 'poppins',
       fontSize: '25px',
       marginBottom: '10px',
+
     },
   }}
 />
-
+</Paper>
     <div className="button-container">
 
 
       <Button variant="contained" onClick={handleUpdateItem}
+       style={{ fontFamily: 'poppins', fontSize: '20px', marginTop: '10px', padding: '10px', backgroundColor: 'darkblue', color: 'white', marginLeft: '10px',boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8)',}}
       disabled={!item.name || !item.category || !item.quantity || !item.price}>
         Update Item
       </Button>
+
+
       <Button
         variant="contained"
-        style={{ backgroundColor: 'red', color: 'white', marginLeft: '10px' }}
+        style={{ fontFamily: 'poppins', fontSize: '20px', marginTop: '10px', padding: '10px', backgroundColor: 'red', color: 'white', marginLeft: '10px',boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8)',}}
         startIcon={<DeleteIcon />}
         onClick={handleDeleteItem}
       >
@@ -726,11 +760,13 @@ TransitionComponent={Transition}
    
 
   
-
+      <Paper elevation={3} sx={{ backgroundColor: 'rgba(112, 112, 112, 0.6)',color: '#120079' , fontWeight: 'bold', textAlign: 'center',
+boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%', padding: '40px', height: 'auto', }} > 
 
       <TextField
   className="form-control"
   label="Item Name"
+  variant='filled'
   error={submitButtonClicked && !name}
   helperText={submitButtonClicked && !name ? "Name is required" : ""}
   value={name}
@@ -762,7 +798,7 @@ TransitionComponent={Transition}
  className="form-control"
           id="outlined-select-currency-native"
           select
-          
+          variant='filled'
           defaultValue="Other"
           SelectProps={{
             native: true,
@@ -771,7 +807,7 @@ TransitionComponent={Transition}
           error={submitButtonClicked && !category}
           helperText={submitButtonClicked && !category ? "Category is required" : ""}
           value={category}
-          variant="standard"
+         
           onChange={(e) => setCategory(e.target.value)}
           InputProps={{
             style: {
@@ -803,6 +839,7 @@ TransitionComponent={Transition}
 <TextField
   className="form-control"
   label="Quantity"
+  variant='filled'
   error={submitButtonClicked && !item.quantity}
   helperText={submitButtonClicked && !item.quantity ? "Quantity is required" : ""}
   value={item.quantity}
@@ -832,6 +869,7 @@ TransitionComponent={Transition}
 <TextField
   className="form-control"
   label="Unit Price"
+  variant='filled'
   error={submitButtonClicked && !item.price}
   helperText={submitButtonClicked && !item.price ? "Unit Price is required" : ""}
   value={item.price}
@@ -865,7 +903,7 @@ TransitionComponent={Transition}
   }}
 />
 
-
+</Paper>
 
 
 
@@ -875,7 +913,7 @@ TransitionComponent={Transition}
     <Button
           variant="contained"
           style={{ backgroundColor: 'rgba(0, 31, 51, 0.8)',color: '#ebebee' , fontWeight: 'bold', textAlign: 'center',
-    padding: '20px',fontSize: '40px',borderColor: '#120079',borderRadius: '40px',borderWidth: '5px' , boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', marginBottom: '20px',borderColor: '#ffffff' }}
+    padding: '20px',fontSize: '40px',borderColor: '#120079',borderRadius: '40px',borderWidth: '5px' ,marginTop: '20px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8)', marginBottom: '20px',borderColor: '#ffffff' }}
           onClick={handleAddItem}
           startIcon={<AddIcon style={{ fontSize: '40px' }} />}
           
