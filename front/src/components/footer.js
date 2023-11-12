@@ -9,12 +9,17 @@ const footerStyle = {
   fontWeight: 'bold', 
   padding: '20px', 
   evalStyle: 'white',
+  position: 'relative',
+  width: '100%',
 };
 
 const Footer = () => {
   return (
+
+
+
     <footer style={footerStyle}>
-      <Container  maxWidth="xm" >
+      <Container  maxWidth="xm"   >
         <div className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             
           <p className="col-md-4 mb-0 text-body-secondary"> <Typography variant="h6" style={{ color: 'white' }}>&copy; 2023 Company, Inc</Typography></p>

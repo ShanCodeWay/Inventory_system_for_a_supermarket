@@ -13,6 +13,7 @@ const ItemSchema = new mongoose.Schema({
   name: String,
   category: String,
   quantity: Number,
+  description: String,
   price: Number,
 });
 

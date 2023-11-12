@@ -34,12 +34,13 @@ router.get('/items/:itemID', async (req, res) => {
 });
 
 router.post('/items', async (req, res) => {
-  const { name, category, quantity, price } = req.body;
+  const { name, category, quantity, description, price } = req.body;
   const newItem = new Item({
     itemID: generateItemID(),
     name,
     category,
     quantity,
+    description,
     price,
   });
 
@@ -53,12 +54,12 @@ router.post('/items', async (req, res) => {
 
 router.put('/items/:itemID', async (req, res) => {
   const { itemID } = req.params;
-  const { name, category, quantity, price } = req.body;
+  const { name, category, quantity, description, price } = req.body;
 
   try {
     const updatedItem = await Item.findOneAndUpdate(
       { itemID },
-      { name, category, quantity, price },
+      { name, category, quantity,description,price },
       { new: true }
     );
     if (updatedItem) {

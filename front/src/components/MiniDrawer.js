@@ -35,7 +35,8 @@ const openedMixin = (theme) => ({
   backgroundColor:'#003', boxShadow: 'none',padding: '20px', opacity: '0.8', 
   color: 'black', 
   fontSize: '40px', 
-  fontFamily: 'poppins', 
+  fontFamily: 'poppins',
+  height : '200px',
   
 });
 
@@ -76,7 +77,7 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  backgroundColor: open ? 'rgb(0, 0, 0, 0)' :  '#003', boxShadow: 'none',paddingTop: '25px',paddingLeft: '-35px', paddingBottom: '25px',
+  backgroundColor: open ? 'rgb(0, 0, 0, 0)' :  'rgb(0, 0, 0, 0)', boxShadow: 'none',paddingTop: '25px',paddingLeft: '-35px', paddingBottom: '25px',
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
@@ -90,6 +91,7 @@ const AppBar = styled(MuiAppBar, {
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
+    
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
@@ -152,7 +154,7 @@ export default function MiniDrawer() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} onClose={handleDrawerClose}>
+      <Drawer variant="permanent" open={open} onClose={handleDrawerClose} sx={{ overflowY: 'hidden' }} >
       <DrawerHeader>
   <IconButton
     color="white"

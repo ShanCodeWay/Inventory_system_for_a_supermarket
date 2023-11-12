@@ -53,19 +53,63 @@ import Slide from '@mui/material/Slide';
 import MenuItem from '@mui/material/MenuItem';
 import TablePagination from '@mui/material/TablePagination';
 import Alert from '@mui/material/Alert';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-
+import ImageSlider from '../components/ImageSlider';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
 
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Modal direction="down" ref={ref} {...props} />;
 });
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&:before': {
+    display: 'none',
+  },
+}));
+
+const AccordionSummary = styled((props) => (
+  <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));
+
+
+
+
+
+
+
+
 
 function Inventory() {
 
@@ -75,6 +119,7 @@ function Inventory() {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [quantity, setQuantity] = useState(0);
+  const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const [value, setValue] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -82,13 +127,24 @@ function Inventory() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
   const [page, setPage] = useState(0);
-const [rowsPerPage, setRowsPerPage] = useState(10);
+const [rowsPerPage, setRowsPerPage] = useState(5);
 const [showAlert, setShowAlert] = useState(false);
 const [alert, setAlert] = useState({
   open: false,
   message: '',
   severity: 'success', // Default severity
 });
+
+
+const [expanded, setExpanded] = React.useState('panel1');
+const [expandedItems, setExpandedItems] = useState([]);
+
+const handleChange = (panel) => (event, newExpanded) => {
+  setExpandedItems((prevExpanded) =>
+    newExpanded ? [panel] : []
+  );
+};
+
 
 
 
@@ -98,21 +154,51 @@ const [alert, setAlert] = useState({
       label: '',
     },
     {
-      value: 'FOOD',
-      label: 'FOOD',
+      value: 'Fresh Produce',
+      label: 'Fresh Produce',
     },
     {
-      value: 'FORZEN',
-      label: 'FORZEN',
+      value: 'Dairy and Eggs',
+      label: 'Dairy and Eggs',
     },
     {
-      value: 'VEGITABLE',
-      label: 'VEGITABLE',
+      value: 'Meat and Seafood',
+      label: 'Meat and Seafood',
     },
     {
-      value: 'MEAT',
-      label: 'MEAT',
-    },
+      value: 'Frozen Foods',
+      label: 'Frozen Foods',
+    }
+    ,
+    {
+      value: 'Bakery',
+      label: 'Bakery',
+    }
+    ,
+    {
+      value: 'Canned Goods',
+      label: 'Canned Goods',
+    }
+    ,
+    {
+      value: 'Beverages',
+      label: 'Beverages',
+    }
+    ,
+    {
+      value: 'Snacks',
+      label: 'Snacks',
+    }
+    ,
+    {
+      value: 'Household and Cleaning Supplies',
+      label: 'Household and Cleaning Supplies',
+    }
+    ,
+    {
+      value: 'Personal Care and Toiletries',
+      label: 'Personal Care and Toiletries',
+    }
   ];
 
 
@@ -140,7 +226,9 @@ const [alert, setAlert] = useState({
           name,
           category,
           quantity: item.quantity,
-          price: item.price
+          price: item.price,
+          description: item.description,
+          
         });
   
         // Close the modal
@@ -157,6 +245,7 @@ const [alert, setAlert] = useState({
         setName('');
         setCategory('');
         setItem({ quantity: '', price: '' });
+        setDescription('');
         setSubmitButtonClicked(false);
   
         
@@ -321,6 +410,7 @@ const [alert, setAlert] = useState({
     setName(''); // Clear the name field
     setCategory(''); // Clear the category field
     setQuantity(''); // Clear the quantity field
+    setDescription(''); // Clear the description field
     setPrice(''); // Clear the price field
     AddopenModal();
     setSubmitButtonClicked(false);
@@ -366,15 +456,38 @@ const [alert, setAlert] = useState({
             {items
   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
   .map((item)=> (
+    <React.Fragment key={item._id}>
               <TableRow key={item._id}>
                 <TableCell
                 sx={{ backgroundColor: ' rgb(120, 0, 0, 0.5)', color: 'white', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
                 boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">
                   {item.itemID}</TableCell>
 
-                <TableCell sx={{ backgroundColor: ' rgb(8, 143, 247, 0.2)', color: 'black', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
+
+
+                  <Accordion expanded={expandedItems.includes(item._id)} onChange={handleChange(item._id)} sx={{ backgroundColor: ' rgb(112, 212, 255, 0.4)', color: 'Balck', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.5)' }} >
+
+                  <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" sx={{ backgroundColor: ' rgb(238, 255, 0, 0.2)', color: 'black', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', 
               boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } >
-                  {item.name}</TableCell>
+
+                <TableCell sx={{  fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', } } >
+                  {item.name} 
+                  </TableCell>  
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography sx={{fontFamily: 'poppins',fontWeight: 'bold', fontSize: '17px',  }}>
+          Item Description: 
+          
+          <Typography sx={{fontFamily: 'poppins',fontWeight: 'semi-bold', fontSize: '15px', }}>
+          {item.description} 
+            </Typography>
+            </Typography>
+        </AccordionDetails>
+      
+       
+                  
+      </Accordion>     
+               
 
                 <TableCell sx={{ backgroundColor: ' rgb(0, 204, 51, 0.2)', color: 'dark-green', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px', padding: '10px', 
               boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' , border: "2px solid #fcf8f8", alignItems: 'center'} } align="center">
@@ -423,24 +536,54 @@ const [alert, setAlert] = useState({
                  
                 </TableCell>
               </TableRow>
+              </React.Fragment>
             ))}
           </TableBody>
+          
         </Table>
-        <TablePagination
-      sx={{
-        backgroundColor: 'rgb(0, 75, 250, 0.2)',color: 'white', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.6)', fontFamily: 'poppins',fontWeight: 'bold', fontSize: '20px',
-      }}
-      rowsPerPageOptions={[10, 25, 100]}
-      component="div"
-      count={items.length} 
-      rowsPerPage={rowsPerPage}
-      page={page}
-      onPageChange={(event, newPage) => setPage(newPage)}
-      onRowsPerPageChange={(event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-      }}
-      variant="outlined" color="primary"/>
+    
+
+  <TablePagination
+    sx={{
+      backgroundColor: 'rgb(0, 75, 250, 0.2)',
+      color: 'white',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.6)',
+      fontFamily: 'poppins',
+      fontWeight: 'bold',
+      fontSize: '20px',
+    }}
+    rowsPerPageOptions={[10, 25, 100]}
+    component="div"
+    count={items.length}
+    rowsPerPage={rowsPerPage}
+    page={page}
+    onPageChange={(event, newPage) => setPage(newPage)}
+    onRowsPerPageChange={(event) => {
+      setRowsPerPage(+event.target.value);
+      setPage(0);
+    }}
+    variant="outlined"
+    color="primary"
+    
+  />
+
+
+  <Button
+    variant="contained"
+    style={{
+      alignItem: 'right',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.6)',
+      position: 'relative',
+      backgroundColor: '#e46030',
+      color: 'white',
+      margin: '10px',
+      marginLeft: '80%',
+    }}
+    onClick={() => setPage(0)}
+  >
+    Go to First Page
+  </Button> 
+     
       </TableContainer>
 
       
@@ -487,8 +630,8 @@ TransitionComponent={Transition}
             </IconButton>
 
     <Typography variant="h6" md="2"  
-    style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)',color: '#120079' , fontWeight: 'bold', textAlign: 'center',
-    padding: '20px',fontSize: '40px',borderColor: '#120079',borderRadius: '40px',borderWidth: '5px' , boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', marginBottom: '20px'}} >
+    style={{ backgroundColor: 'rgba(255, 190, 255, 0.8)',color: '#120079' , fontWeight: 'bold', textAlign: 'center',
+    padding: '20px',fontSize: '40px',borderColor: '#120079',borderRadius: '40px',borderWidth: '5px' , boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8)', marginBottom: '20px'}} >
       Edit Item</Typography>
 
 <Paper elevation={3} sx={{ backgroundColor: 'rgba(112, 112, 112, 0.6)',color: '#120079' , fontWeight: 'bold', textAlign: 'center',
@@ -646,6 +789,7 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
   }}
 />
 
+
 <TextField
   className="form-control"
   label="Unit Price"
@@ -679,6 +823,35 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
       fontSize: '25px',
       marginBottom: '10px',
 
+    },
+  }}
+/>
+<TextField
+  className="form-control"
+  multiline
+  maxRows={4}
+  id="filled-search"
+  variant='filled'
+  label="please insert item Description"
+  value={item.description}
+  onChange={(e) => setItem({ ...item, description: e.target.value })}
+  error={!item.description} // Set error to true when name is empty
+  helperText={!item.description ? 'description is required' : ''}
+  InputProps={{
+    style: {
+      color: 'blue', 
+      fontWeight: 'normal',
+      fontSize: '25px',
+      fontFamily: 'poppins', 
+    },
+  }}
+  InputLabelProps={{
+    style: {
+      color: 'blue', 
+      fontWeight: 'bold',
+      fontSize: '25px', 
+      fontFamily: 'montserrat',
+      
     },
   }}
 />
@@ -753,9 +926,9 @@ TransitionComponent={Transition}
 
 
     <Typography variant="h6" md="2"  
-    style={{ width: '60%',  backgroundColor: 'rgba(255,255, 0, 0.6)',color: '#1c0303' , fontWeight: 'bold', textAlign: 'center',
+    style={{ width: '60%',  backgroundColor: 'rgba(255,230, 0, 0.6)',color: '#1c0303' , fontWeight: 'bold', textAlign: 'center',
     padding: '20px',fontSize: '40px',borderColor: '#120079',borderRadius: '40px',borderWidth: '5px' ,
-     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', marginBottom: '20px', fontFamily: 'poppins'}} >
+     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.8)', marginBottom: '20px', fontFamily: 'poppins'}} >
       ADD Item</Typography>
    
 
@@ -902,6 +1075,34 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
     },
   }}
 />
+<TextField
+  className="form-control"
+  multiline
+  maxRows={4}
+  id="filled-search"
+  variant='filled'
+  label="please insert item Description"
+  value={item.description}
+  onChange={(e) => setItem({ ...item, description: e.target.value })}
+
+  InputProps={{
+    style: {
+      color: 'blue', 
+      fontWeight: 'normal',
+      fontSize: '25px',
+      fontFamily: 'poppins', 
+    },
+  }}
+  InputLabelProps={{
+    style: {
+      color: 'blue', 
+      fontWeight: 'bold',
+      fontSize: '25px', 
+      fontFamily: 'montserrat',
+      
+    },
+  }}
+/>
 
 </Paper>
 
@@ -951,8 +1152,11 @@ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.9)', borderRadius: '40px', width: '100%'
 </Modal>
 
 
+<div style={{ position: 'absolute', justifyContent: 'center', marginLeft: '59%' ,marginTop: '-25%'}}>
+  
+  <ImageSlider />
 
-
+</div>
 
     </div>
   );
