@@ -11,10 +11,10 @@ import p8 from './SliderImages/I8.jfif';
 import p9 from './SliderImages/I11.jpg';
 import p10 from './SliderImages/I10.jfif';
 
-const images = [p1, p2, p3, p4, p5, p6, p7, p8,p9, p10];
+const images                                        = [p1, p2, p3, p4, p5, p6, p7, p8,p9, p10];
 
 const ImageSlider = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex]   = useState(0);
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -27,18 +27,18 @@ const ImageSlider = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextImage, 2500); // Change image every 3 seconds
+    const interval                                  = setInterval(nextImage, 2500); // Change image every 3 seconds
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="image-slider">
-      <div className="slider-container">
-        <div className="image-container">
+    <div className                                  = "image-slider">
+      <div className                                = "slider-container">
+        <div className                              = "image-container">
           <img
-            src={images[currentImageIndex]}
-            alt={`Image ${currentImageIndex + 1}`}
-            className="slider-image-cart"
+            src                                     = {images[currentImageIndex]}
+            alt                                     = {`Image ${currentImageIndex + 1}`}
+            className                               = "slider-image-cart"
           />
         </div>
       </div>

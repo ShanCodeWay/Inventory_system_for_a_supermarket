@@ -1,11 +1,11 @@
 // server.js
-const express = require('express');
-const cors = require('cors');
-const { Item } = require('./models/database');
-const { itemRoutes } = require('./controller/routes');
+const express         = require('express');
+const cors            = require('cors');
+const { Item }        = require('./models/database');
+const { itemRoutes }  = require('./router/routes');
 
-const app = express();
-const port = process.env.PORT || 3000;
+const app             = express();
+const port            = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());

@@ -8,15 +8,15 @@ import black from './ecommerce-website.webp';
 
 function App() {
   const appStyle = {
-    backgroundImage: `url(${black})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-   height: '100%',
+    backgroundImage   : `url(${black})`,
+    backgroundSize    : 'cover',
+    backgroundRepeat  : 'no-repeat',
+   height             : '100%',
     
   };
 
   return (
-    <div className="App" style={appStyle}>
+    <div className    = "App" style={appStyle}>
       <Header />
        
       <Inventory />

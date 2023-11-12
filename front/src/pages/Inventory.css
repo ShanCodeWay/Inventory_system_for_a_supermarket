@@ -1,36 +1,36 @@
 /* Custom CSS */
 .container {
-    margin-top: 20px;
-    background-color: aqua;
+    margin-top          : 20px;
+    background-color    : aqua;
   }
   
   .form-container {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: aqua;
+    padding             : 20px;
+    border              : 1px solid #ccc;
+    border-radius       : 5px;
+    background-color    : aqua;
   }
   
   .table-container {
-    margin-top: 20px;
-    background-color: aqua;
+    margin-top          : 20px;
+    background-color    : aqua;
   }
   
   .edit-item-container {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
+    padding             : 20px;
+    border              : 1px solid #ccc;
+    border-radius       : 5px;
+    margin-top          : 20px;
   }
   
   .button-container {
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
+    margin-top          : 10px;
+    display             : flex;
+    gap                 : 10px;
   }
   
   /* Center the table content */
   .table {
-    text-align: center;
+    text-align          : center;
   }
   
