@@ -331,10 +331,7 @@ const handleRefresh = async () => {
   
   
 
-  const doSomethingWith = (value) => {
-    // Call the handleSearchItem function with the search value
-    handleSearchItem(value);
-  };
+ 
 
   const openModal = () => {
     setIsModalOpen(true);
